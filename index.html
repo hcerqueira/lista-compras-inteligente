@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Compras Inteligente</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#4A90E2">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Lista Inteligente">
+    <link rel="apple-touch-icon" href="/assets/icon-192.png">
+</head>
+<body>
+
+    <header>
+        <h1>🛒 Lista de Compras Inteligente</h1>
+        <nav>
+            <button id="nav-stock" class="active">📦 Estoque Atual</button>
+            <button id="nav-list">🛒 Lista de Compras</button>
+            <button id="nav-history">📅 Histórico</button>
+        </nav>
+    </header>
+
+    <main>
+        <form id="form-add-item">
+            <h3>Adicionar Novo Item ao Estoque</h3>
+            <div class="form-grid">
+                <input type="text" id="item-name" placeholder="Nome do Item" required>
+                <select id="item-category">
+                    <option value="Outros">Categoria</option>
+                    <option value="Hortifruti">Hortifruti</option>
+                    <option value="Laticínios">Laticínios</option>
+                    <option value="Carnes">Carnes</option>
+                    <option value="Limpeza">Limpeza</option>
+                    <option value="Higiene">Higiene</option>
+                    <option value="Padaria">Padaria</option>
+                    <option value="Mercearia">Mercearia</option>
+                </select>
+                <input type="number" id="item-min" placeholder="Qtd. Mínima" min="0" required>
+                <input type="number" id="item-current" placeholder="Qtd. Atual" min="0" required>
+                <button type="submit">Adicionar</button>
+            </div>
+        </form>
+
+        <section id="view-stock" class="view active">
+            <h2>📦 Estoque Atual (Mestre)</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Status</th>
+                            <th>Item</th>
+                            <th>Categoria</th>
+                            <th>Estoque</th>
+                            <th>Mínimo</th>
+                            <th>A Comprar</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="stock-table-body">
+                        </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="view-list" class="view">
+            <h2>🛒 Lista de Compras (Filtro)</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Status</th>
+                            <th>Item</th>
+                            <th>Categoria</th>
+                            <th>A Comprar</th>
+                            <th>Preço Unit.</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="shopping-list-body">
+                        </tbody>
+                </table>
+            </div>
+            <div class="summary">
+                <strong>Custo Total Estimado: <span id="total-cost">R$ 0,00</span></strong>
+            </div>
+        </section>
+
+        <section id="view-history" class="view">
+            <h2>📅 Histórico de Compras</h2>
+            <button id="btn-clear-history">Limpar Histórico</button>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Data</th>
+                            <th>Item</th>
+                            <th>Qtd. Comprada</th>
+                            <th>Custo Total</th>
+                        </tr>
+                    </thead>
+                    <tbody id="history-table-body">
+                        </tbody>
+                </table>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="app.js"></script>
+    <script>
+        // Registrar o Service Worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js')
+                    .then(registration => console.log('ServiceWorker registrado com sucesso:', registration.scope))
+                    .catch(error => console.log('Falha no registro do ServiceWorker:', error));
+            });
+        }
+    </script>
+</body>
+</html>

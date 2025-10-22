@@ -1,0 +1,198 @@
+/* --- GERAL --- */
+:root {
+    --color-primary: #4A90E2;
+    --color-dark: #333;
+    --color-light: #fff;
+    --color-gray: #f4f4f4;
+    --color-border: #ddd;
+    
+    --status-em-falta: #FBEAEC;
+    --status-comprar: #FFF9E3;
+    --status-limite: #EAF3FB;
+    --status-suficiente: #E8F5E9;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    margin: 0;
+    background-color: var(--color-gray);
+    color: var(--color-dark);
+    line-height: 1.5;
+}
+
+header {
+    background-color: var(--color-primary);
+    color: var(--color-light);
+    padding: 1rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+h1 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+nav button {
+    background: none;
+    border: 1px solid var(--color-light);
+    color: var(--color-light);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    opacity: 0.7;
+}
+
+nav button.active {
+    background-color: var(--color-light);
+    color: var(--color-primary);
+    opacity: 1;
+    font-weight: bold;
+}
+
+main {
+    max-width: 1200px;
+    margin: 1rem auto;
+    padding: 0 1rem;
+}
+
+/* --- SEÇÕES (VIEWS) --- */
+.view {
+    display: none;
+    background-color: var(--color-light);
+    border-radius: 8px;
+    padding: 1rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+.view.active {
+    display: block;
+}
+
+/* --- FORMULÁRIO --- */
+#form-add-item {
+    background-color: var(--color-light);
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+    gap: 0.5rem;
+}
+
+#form-add-item h3 {
+    margin-top: 0;
+}
+
+input, select, button {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    box-sizing: border-box; /* Importante para o layout */
+    font-size: 1rem;
+}
+
+button[type="submit"] {
+    background-color: var(--color-primary);
+    color: var(--color-light);
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+}
+button[type="submit"]:hover {
+    opacity: 0.9;
+}
+
+/* --- TABELAS --- */
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+th, td {
+    text-align: left;
+    padding: 0.75rem;
+    border-bottom: 1px solid var(--color-border);
+    vertical-align: middle;
+}
+
+th {
+    background-color: var(--color-gray);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+}
+
+td .status-badge {
+    padding: 0.25rem 0.5rem;
+    border-radius: 12px;
+    font-weight: bold;
+    font-size: 0.8rem;
+    white-space: nowrap;
+}
+
+/* --- CORES DE STATUS --- */
+.status-em-falta { background-color: var(--status-em-falta); border-left: 4px solid #D32F2F; }
+.status-comprar { background-color: var(--status-comprar); border-left: 4px solid #FFA000; }
+.status-limite { background-color: var(--status-limite); border-left: 4px solid #1976D2; }
+.status-suficiente { background-color: var(--status-suficiente); border-left: 4px solid #388E3C; }
+
+.status-em-falta .status-badge { background-color: #D32F2F; color: white; }
+.status-comprar .status-badge { background-color: #FFA000; color: white; }
+.status-limite .status-badge { background-color: #1976D2; color: white; }
+.status-suficiente .status-badge { background-color: #388E3C; color: white; }
+
+/* --- BOTÕES DE AÇÃO --- */
+td .actions {
+    display: flex;
+    gap: 0.25rem;
+    flex-wrap: nowrap;
+}
+.btn-action {
+    background: none;
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 0.3rem 0.5rem;
+}
+.btn-action:hover {
+    background-color: var(--color-gray);
+}
+
+.btn-delete { color: #D32F2F; }
+.btn-buy { color: #388E3C; }
+.btn-edit { color: #1976D2; }
+
+/* --- RESPONSIVIDADE --- */
+@media (max-width: 768px) {
+    .form-grid {
+        grid-template-columns: 1fr; /* Empilha o formulário */
+    }
+    
+    h1 { font-size: 1.2rem; }
+    nav button { padding: 0.4rem 0.8rem; font-size: 0.8rem; }
+
+    /* Força a tabela a não ter "wrap" e mostra scroll horizontal */
+    th, td {
+        white-space: nowrap;
+        padding: 0.5rem;
+    }
+}

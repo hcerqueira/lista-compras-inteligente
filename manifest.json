@@ -1,0 +1,21 @@
+{
+    "name": "Lista de Compras Inteligente",
+    "short_name": "Lista Intel",
+    "description": "App PWA para controle de compras e estoque doméstico.",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#4A90E2",
+    "icons": [
+        {
+            "src": "/assets/icon-192.png",
+            "type": "image/png",
+            "sizes": "192x192"
+        },
+        {
+            "src": "/assets/icon-512.png",
+            "type": "image/png",
+            "sizes": "512x512"
+        }
+    ]
+}
