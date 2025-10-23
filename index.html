@@ -20,6 +20,7 @@
             <button id="nav-stock" class="active">📦 Estoque Atual</button>
             <button id="nav-list">🛒 Lista de Compras</button>
             <button id="nav-history">📅 Histórico</button>
+            <button id="nav-settings">⚙️ Config.</button>
         </nav>
     </header>
 
@@ -29,14 +30,22 @@
             <div class="form-grid">
                 <input type="text" id="item-name" placeholder="Nome do Item" required>
                 <select id="item-category">
-                    <option value="Outros">Categoria</option>
+                    <option value="Mercearia">Categoria</option>
+                    <option value="Mercearia">Mercearia</option>
                     <option value="Hortifruti">Hortifruti</option>
                     <option value="Laticínios">Laticínios</option>
                     <option value="Carnes">Carnes</option>
                     <option value="Limpeza">Limpeza</option>
                     <option value="Higiene">Higiene</option>
                     <option value="Padaria">Padaria</option>
-                    <option value="Mercearia">Mercearia</option>
+                    <option value="Outros">Outros</option>
+                </select>
+                <select id="item-frequency">
+                    <option value="Mensal">Frequência</option>
+                    <option value="Semanal">Semanal</option>
+                    <option value="Quinzenal">Quinzenal</option>
+                    <option value="Mensal">Mensal</option>
+                    <option value="Trimestral">Trimestral</option>
                 </select>
                 <input type="number" id="item-min" placeholder="Qtd. Mínima" min="0" required>
                 <input type="number" id="item-current" placeholder="Qtd. Atual" min="0" required>
@@ -45,14 +54,14 @@
         </form>
 
         <section id="view-stock" class="view active">
-            <h2>📦 Estoque Atual (Mestre)</h2>
+            <h2>📦 Estoque Atual (Organizado por Categoria)</h2>
             <div class="table-container">
                 <table>
                     <thead>
                         <tr>
                             <th>Status</th>
                             <th>Item</th>
-                            <th>Categoria</th>
+                            <th>Frequência</th>
                             <th>Estoque</th>
                             <th>Mínimo</th>
                             <th>A Comprar</th>
@@ -66,25 +75,32 @@
         </section>
 
         <section id="view-list" class="view">
-            <h2>🛒 Lista de Compras (Filtro)</h2>
+            <h2>🛒 Lista de Compras (Modo Supermercado)</h2>
+            
+            <div id="list-controls">
+                <button id="btn-switch-mode">🛠️ Mudar p/ Edição de Preço</button>
+                <div class="summary">
+                    <strong>Custo Total Estimado: <span id="total-cost">R$ 0,00</span></strong>
+                </div>
+            </div>
+            
+            <button id="btn-complete-purchase" style="display:none;">✅ Marcar Itens Checados como Comprados</button>
+
             <div class="table-container">
-                <table>
+                <table id="list-table">
                     <thead>
                         <tr>
-                            <th>Status</th>
+                            <th>Comprar</th>
                             <th>Item</th>
-                            <th>Categoria</th>
-                            <th>A Comprar</th>
-                            <th>Preço Unit.</th>
-                            <th>Ações</th>
+                            <th>Necessidade</th>
+                            <th class="editable-col">Qtd. Manual</th>
+                            <th class="editable-col">Preço Unit.</th>
+                            <th class="editable-col">Ações</th>
                         </tr>
                     </thead>
                     <tbody id="shopping-list-body">
                         </tbody>
                 </table>
-            </div>
-            <div class="summary">
-                <strong>Custo Total Estimado: <span id="total-cost">R$ 0,00</span></strong>
             </div>
         </section>
 
@@ -106,12 +122,27 @@
                 </table>
             </div>
         </section>
+        
+        <section id="view-settings" class="view">
+            <h2>⚙️ Configurações e Backup</h2>
+            <div id="backup-controls">
+                <h3>Backup Local (JSON)</h3>
+                <p>Crie um arquivo de segurança com todo o seu estoque e histórico.</p>
+                <button id="btn-export-data" class="btn-action">💾 Exportar Dados (Backup)</button>
+                
+                <h3 style="margin-top: 1.5rem;">Restauração de Dados</h3>
+                <p>Selecione um arquivo de backup JSON para restaurar.</p>
+                <input type="file" id="input-import-data" accept="application/json" style="margin-bottom: 0.5rem;">
+                <button id="btn-import-data" class="btn-action btn-delete">⬆️ Importar e Substituir</button>
+                <p style="color:red; font-size: 0.9em;">Atenção: A importação irá APAGAR os dados atuais e substituí-los.</p>
+            </div>
+        </section>
 
     </main>
 
     <script src="app.js"></script>
     <script>
-        // Registrar o Service Worker
+        // Registro do Service Worker para o PWA (Modo Offline)
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('/service-worker.js')
