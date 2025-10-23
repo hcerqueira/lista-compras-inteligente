@@ -49,6 +49,7 @@ nav button {
     cursor: pointer;
     font-size: 0.9rem;
     opacity: 0.7;
+    transition: all 0.2s;
 }
 
 nav button.active {
@@ -87,7 +88,7 @@ main {
 
 .form-grid {
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr; 
     gap: 0.5rem;
 }
 
@@ -100,7 +101,7 @@ input, select, button {
     padding: 0.75rem;
     border: 1px solid var(--color-border);
     border-radius: 4px;
-    box-sizing: border-box; /* Importante para o layout */
+    box-sizing: border-box; 
     font-size: 1rem;
 }
 
@@ -140,6 +141,15 @@ th {
     text-transform: uppercase;
 }
 
+.category-header {
+    background-color: #e0f2f7; /* Cor clara para cabeçalho de categoria */
+    color: var(--color-dark);
+    font-weight: bold;
+    text-align: left;
+    text-transform: uppercase;
+    font-size: 1rem;
+}
+
 td .status-badge {
     padding: 0.25rem 0.5rem;
     border-radius: 12px;
@@ -172,6 +182,7 @@ td .actions {
     cursor: pointer;
     font-size: 1rem;
     padding: 0.3rem 0.5rem;
+    transition: background-color 0.2s;
 }
 .btn-action:hover {
     background-color: var(--color-gray);
@@ -180,6 +191,74 @@ td .actions {
 .btn-delete { color: #D32F2F; }
 .btn-buy { color: #388E3C; }
 .btn-edit { color: #1976D2; }
+
+/* --- BACKUP E CONFIGURAÇÕES --- */
+#view-settings .btn-action {
+    display: block;
+    width: 100%;
+    margin-bottom: 1rem;
+    padding: 0.75rem;
+}
+#btn-export-data {
+    background-color: #388E3C;
+    color: white;
+    border-color: #388E3C;
+}
+#btn-import-data {
+    background-color: #D32F2F;
+    color: white;
+    border-color: #D32F2F;
+}
+
+/* --- MODO SUPERMERCADO (Checklist) --- */
+/* Esconde colunas que não são úteis no modo checklist */
+.checklist-mode .editable-col {
+    display: none;
+}
+#list-table thead th:first-child {
+    width: 50px;
+}
+.list-checkbox {
+    width: 20px;
+    height: 20px;
+    margin: 0;
+    cursor: pointer;
+}
+
+/* Controles */
+#list-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+}
+.summary {
+    font-size: 1.1rem;
+}
+#btn-complete-purchase {
+    background-color: #4CAF50;
+    color: white;
+    font-weight: bold;
+    border: none;
+    padding: 0.75rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 1rem;
+    width: 100%;
+}
+#btn-switch-mode {
+    background-color: #1976D2;
+    color: white;
+    font-weight: bold;
+    border: none;
+    padding: 0.75rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 1rem;
+}
+#btn-switch-mode:hover { opacity: 0.9; }
+
 
 /* --- RESPONSIVIDADE --- */
 @media (max-width: 768px) {
@@ -190,9 +269,22 @@ td .actions {
     h1 { font-size: 1.2rem; }
     nav button { padding: 0.4rem 0.8rem; font-size: 0.8rem; }
 
-    /* Força a tabela a não ter "wrap" e mostra scroll horizontal */
     th, td {
         white-space: nowrap;
         padding: 0.5rem;
+    }
+    
+    #list-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    #btn-switch-mode {
+        margin-bottom: 0.5rem;
+        margin-right: 0;
+    }
+    .summary {
+        text-align: center;
+        width: 100%;
+        margin-top: 0.5rem;
     }
 }
